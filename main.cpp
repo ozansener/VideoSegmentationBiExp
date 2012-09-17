@@ -73,7 +73,7 @@ int main(){
  //       sprintf(aName,"nexyS%d.txt",i+1);
 //        curFrame->writeOutGraph(aName,false);
         
-/*        if(i%20==19)
+        if(i%20==19)
         {
             curFrame->getPixelResidual();
             curFrame->solveGCutNoGMM(); 
@@ -81,24 +81,24 @@ int main(){
             curFrame->calcGMMProb();
             curFrame->solveGCut();
             curFrame->getPixelWiseResidual();
-        }else{*/
+        }else{
             curFrame->getPixelResidual();
             curFrame->solveGCutNoGMM(); 
             curFrame->getPixelWiseResidual();
-        /*}*/
+        }
   //      sprintf(aName,"res%d.txt",i+1);
   //      curFrame->writeOutGraph(aName,false);
         
 
-//        curFrame->smooth();
+        curFrame->smooth();
 
 //        sprintf(aName,"resS%d.txt",i+1);
  //       curFrame->writeOutGraph(aName,false);
 
-   //     Frame.copyTo(canvIm);
-   //     curFrame->getResult(canvIm);
-   //     sprintf(imName,"Res%d.png",i+1);
-   //     imwrite(imName,canvIm);
+        Frame.copyTo(canvIm);
+        curFrame->getResult(canvIm);
+        sprintf(imName,"Res%d.png",i+1);
+        imwrite(imName,canvIm);
 
         delete prevFrame;
         prevFrame = curFrame;
