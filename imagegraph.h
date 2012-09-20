@@ -6,6 +6,8 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include "GMM.h"
 #include "graph.h"
+#include <iostream>
+#include <set>
 
 typedef Graph<float,float,float> FloatGraph;
 
@@ -26,7 +28,8 @@ typedef struct _OS{
 
     int numTempN;
     int idTempN[10];
-    
+    int arcID[10];
+
     int numPixel;
 
     CLR meanColor;
@@ -55,7 +58,7 @@ public:
     void learnGMM2(int iter);
     void overSegment(int m_spcount,int m_compactness);
     void solveGCut();
-    void solveGCutNoGMM();
+    void solveGCutNoGMM(ImageGraph*);
     void calcGMMProb();
     void setGroundTruth(char *fileName);
     void getSPBoundary(cv::Mat& imCanvas);
@@ -74,6 +77,7 @@ private:
     OS* grOS;
     int* segmentID;
     int numlabels;
+    std::set<int> *prevOverlaps;
 
     GMM bgGMM;
     GMM fgGMM;

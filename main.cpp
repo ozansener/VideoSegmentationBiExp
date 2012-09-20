@@ -17,7 +17,7 @@ using namespace cv;
 int main(){
     namedWindow("VS");
 
-    VideoCapture cap("/home/ozan/Desktop/VideoData/processedInVideo/iceIn.avi");
+    VideoCapture cap("/home/ozan/Desktop/VideoData/processedInVideo/erhanIn.avi");
 
     ImageGraph* curFrame = new ImageGraph;
     ImageGraph* prevFrame = new ImageGraph;
@@ -36,7 +36,7 @@ int main(){
     imwrite("raw0.jpg",PrevFrame);
     prevFrame->setFrame(PrevFrame);
     prevFrame->overSegment(1000,20);
-    prevFrame->setGroundTruth("/home/ozan/Desktop/VideoData/processedInVideo/gtIce.jpg");
+    prevFrame->setGroundTruth("/home/ozan/Desktop/VideoData/processedInVideo/gtErhan.jpg");
     prevFrame->learnGMM(15);
     prevFrame->calcGMMProb();
     prevFrame->solveGCut();
@@ -55,7 +55,7 @@ int main(){
     char aName[1024];
     clock_t start = clock();
 
-    for(int i=0;i<40;i++)
+    for(int i=0;i<350;i++)
     {
         cap>>dummyMat;
         resize(dummyMat,Frame,Size(width,height));
@@ -73,24 +73,24 @@ int main(){
  //       sprintf(aName,"nexyS%d.txt",i+1);
 //        curFrame->writeOutGraph(aName,false);
         
-        if(i%20==19)
-        {
+         if(i%80==79)
+       {
             curFrame->getPixelResidual();
-            curFrame->solveGCutNoGMM(); 
+            curFrame->solveGCutNoGMM(prevFrame); 
             curFrame->learnGMM2(15);
             curFrame->calcGMMProb();
             curFrame->solveGCut();
             curFrame->getPixelWiseResidual();
         }else{
-            curFrame->getPixelResidual();
-            curFrame->solveGCutNoGMM(); 
-            curFrame->getPixelWiseResidual();
+     //      curFrame->getPixelResidual();
+            curFrame->solveGCutNoGMM(prevFrame); 
+   //         curFrame->getPixelWiseResidual();
         }
   //      sprintf(aName,"res%d.txt",i+1);
   //      curFrame->writeOutGraph(aName,false);
         
 
-        curFrame->smooth();
+//        curFrame->smooth();
 
 //        sprintf(aName,"resS%d.txt",i+1);
  //       curFrame->writeOutGraph(aName,false);

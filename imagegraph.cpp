@@ -13,6 +13,7 @@ using namespace std;
 
 ImageGraph::ImageGraph()
 {
+    prevOverlaps = NULL;
 }
 
 ImageGraph::~ImageGraph(){
@@ -24,6 +25,10 @@ ImageGraph::~ImageGraph(){
 
     delete gr;
     delete [] outGraph;
+    
+    if(prevOverlaps!=NULL)
+        delete [] prevOverlaps;
+
 }
 
 void ImageGraph::mergeS(OS* grOS,int s1,int s2){
@@ -225,9 +230,10 @@ void ImageGraph::calcGMMProb(){
 void ImageGraph::solveGCut(){
     //0.5 for ice skater
     //2 for erhan
-    float e2c = 2; //Make it 1 finally :)
+    float e2c = 3; //Make it 1 finally :)
     float cp=(2.0/2.0);
     float dist;
+    int eID=0;
     delete gr;
     gr = new FloatGraph(numlabels,numlabels*10);
     for(int i=0;i<numlabels;i++)
@@ -276,10 +282,11 @@ void ImageGraph::solveGCut(){
                 dist += (grOS[i].meanColor.R - grOS[grOS[i].idSpatN[k]].meanColor.R)*(grOS[i].meanColor.B - grOS[grOS[i].idSpatN[k]].meanColor.R);
 
                 edCol = exp((dist*cp*(-1))/meanE);
-
+                grOS[i].arcID[k]=eID++;
                 gr->add_edge(i,grOS[i].idSpatN[k],e2c*(edCol),e2c*(edCol));
             }
     }
+//    cout<<"Finish"<<endl;
     sumNodeUp();
     gr->maxflow();
     for(int i=0;i<numlabels;i++)
@@ -493,34 +500,35 @@ void ImageGraph::smooth(){
 }   
 
 void ImageGraph::getFromPrevFrame(ImageGraph* prev){
-    set<int> alreadyChecked;
+    // Find prev frame overlaps, and apply bi-exponential filter.
+    prevOverlaps = new set<int>[numlabels];
     float normA;
     float ress;
     for(int i=0;i<numlabels;i++)
     {
             normA=0;
             ress=0;
-            alreadyChecked.clear();
+            prevOverlaps[i].clear();
             for(int x=grOS[i].bottomRight.X;x<=grOS[i].topLeft.X;x++)
                 for(int y=grOS[i].bottomRight.Y;y<=grOS[i].topLeft.Y;y++)
                 {
-                    if(alreadyChecked.count(prev->segmentID[y*width+x])>0)
+                    if(prevOverlaps[i].count(prev->segmentID[y*width+x])>0)
                         continue;
-                    alreadyChecked.insert(prev->segmentID[y*width+x]);
+                    prevOverlaps[i].insert(prev->segmentID[y*width+x]);
                     normA+=perm(prev->grOS[prev->segmentID[y*width+x]].meanColor,grOS[i].meanColor,15);
                     ress+=perm(prev->grOS[prev->segmentID[y*width+x]].meanColor,grOS[i].meanColor,15)*prev->grOS[prev->segmentID[y*width+x]].residual;
                 }
             grOS[i].residual=ress/normA;
     }
+    return;
     meanRes = 0;
     for(int i=0;i<numlabels;i++)
         meanRes+=abs(grOS[i].residual);
     meanRes/=numlabels;
-  //  cout<<"Prev Mult:"<<meanRes<<" "<<prev->meanRes<<endl;
+
     float multC = 2/meanRes;//prev->meanRes/meanRes;
     for(int i=0;i<numlabels;i++)
         grOS[i].residual*=multC;
-    
 }
 
 void ImageGraph::sumNodeUp(){
@@ -531,9 +539,10 @@ void ImageGraph::sumNodeUp(){
     //cout<<meanRes<<" "<<numlabels<<endl;
 }
 
-void ImageGraph::solveGCutNoGMM(){
+void ImageGraph::solveGCutNoGMM(ImageGraph* prev){
     float e2c = 0.0001 ; //Make it 1 finally :)
     float cp=(2.0/2.0);
+    int eID=0;
     float dist;
     delete gr;
     gr = new FloatGraph(numlabels,numlabels*10);
@@ -556,6 +565,16 @@ void ImageGraph::solveGCutNoGMM(){
     float edCol;
     float edFD;
     float tempFD;
+
+    double wSum;
+    double permSumF;
+    double permSumB;
+    double ww;
+
+    set<int>::iterator it1;
+    set<int>::iterator it2;
+    bool fla=false;
+    int flaN=0;
     for(int i=0;i<numlabels;i++)
     {
         if(grOS[i].residual<0)//FG
@@ -563,20 +582,51 @@ void ImageGraph::solveGCutNoGMM(){
         else
             gr->add_tweights(i,grOS[i].residual,0);        
 
-
          for(int k=0;k<grOS[i].numSpatN;k++)
             if(grOS[i].idSpatN[k]<i)
             {
-                dist = (grOS[i].meanColor.B - grOS[grOS[i].idSpatN[k]].meanColor.B)*(grOS[i].meanColor.B - grOS[grOS[i].idSpatN[k]].meanColor.B);
-                dist += (grOS[i].meanColor.G - grOS[grOS[i].idSpatN[k]].meanColor.G)*(grOS[i].meanColor.G- grOS[grOS[i].idSpatN[k]].meanColor.G);
-                dist += (grOS[i].meanColor.R - grOS[grOS[i].idSpatN[k]].meanColor.R)*(grOS[i].meanColor.B - grOS[grOS[i].idSpatN[k]].meanColor.R);
-
-                edCol = exp((dist*cp*(-1))/meanE);
-
-                gr->add_edge(i,grOS[i].idSpatN[k],e2c*(edCol),e2c*(edCol));
+                permSumF=0;permSumB=0;wSum=0;
+                for(it1=prevOverlaps[i].begin();it1!=prevOverlaps[i].end();it1++)
+                    for(it2=prevOverlaps[grOS[i].idSpatN[k]].begin();it2!=prevOverlaps[grOS[i].idSpatN[k]].end();it2++)
+                    {
+                        //Change it a bit :p
+                        if(*it1<*it2){
+                            //2->1
+                            fla = false;
+                            for(int m=0;m<prev->grOS[*it2].numSpatN;m++)
+                                if(prev->grOS[*it2].idSpatN[m]==*it1)
+                                {
+                                    fla = true;
+                                    flaN = m;
+                                }
+                            if(!fla)
+                                continue;
+                            ww=perm(prev->grOS[*it1].meanColor,grOS[i].meanColor,5)*perm(prev->grOS[*it2].meanColor,grOS[grOS[i].idSpatN[k]].meanColor,5);
+                            wSum+=ww;
+                            permSumF+=prev->gr->get_rcap(prev->gr->get_first_arc()+(2*prev->grOS[*it2].arcID[flaN])+1)*ww;
+                            permSumB+=prev->gr->get_rcap(prev->gr->get_first_arc()+(2*prev->grOS[*it2].arcID[flaN]))*ww;
+                        }else{
+                            //1->2
+                            fla = false;
+                            for(int m=0;m<prev->grOS[*it1].numSpatN;m++)
+                                if(prev->grOS[*it1].idSpatN[m]==*it2)
+                                {
+                                    fla=true;
+                                    flaN = m;
+                                }
+                            if(!fla)
+                                continue;
+                            ww=perm(prev->grOS[*it1].meanColor,grOS[i].meanColor,5)*perm(prev->grOS[*it2].meanColor,grOS[grOS[i].idSpatN[k]].meanColor,5);
+                            wSum+=ww;
+                            permSumF+=prev->gr->get_rcap(prev->gr->get_first_arc()+2*prev->grOS[*it1].arcID[flaN])*ww;
+                            permSumB+=prev->gr->get_rcap(prev->gr->get_first_arc()+2*prev->grOS[*it1].arcID[flaN]+1)*ww;
+                        }
+                    }
+                gr->add_edge(i,grOS[i].idSpatN[k],permSumF/wSum,permSumB/wSum);
+                grOS[i].arcID[k]=eID++;
             }
     }
-    sumNodeUp();
+//    sumNodeUp();
     gr->maxflow();
     for(int i=0;i<numlabels;i++)
         if(gr->what_segment(i)==FloatGraph::SOURCE)
@@ -596,8 +646,8 @@ void ImageGraph::smoothN(){
     for(int i=0;i<width*height;i++)
         ones[i]=1;    
 
-    biFilt(outGraph,outGraphTemp,5);
-    biFilt(ones,outGraph,5);
+    biFilt(outGraph,outGraphTemp,7);
+    biFilt(ones,outGraph,7);
 
     for(int i=0;i<width*height;i++)
         outGraph[i]=outGraphTemp[i]/outGraph[i];     
@@ -612,14 +662,15 @@ void ImageGraph::smoothN(){
         grOS[i].residual=grOS[i].residual/grOS[i].numPixel;
     }
 
-
+/*
     meanRes = 0;
     for(int i=0;i<numlabels;i++)
         meanRes+=abs(grOS[i].residual);
     meanRes/=numlabels;
+
     float multC = 2/meanRes;//prev->meanRes/meanRes;
     for(int i=0;i<numlabels;i++)
-        grOS[i].residual*=multC;
+        grOS[i].residual*=multC;*/
 
     delete [] ones;
     delete [] outGraphTemp;
