@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Householder
+END
+HouseholderSequence.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Householder/HouseholderSequence.h
+END
+BlockHouseholder.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Householder/BlockHouseholder.h
+END
+Householder.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Householder/Householder.h
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Householder/CMakeLists.txt
+END

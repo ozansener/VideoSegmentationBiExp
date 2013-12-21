@@ -1,0 +1,104 @@
+10
+
+dir
+45
+https://collab.nokia.com/svn/2D3D_metu/Scribble/Eigen/src
+https://collab.nokia.com/svn/2D3D_metu
+
+
+
+2011-10-04T14:50:37.848129Z
+23
+e0351761
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+9f6f4810-82b7-4275-824b-934cf6196825
+
+LU
+dir
+
+Cholesky
+dir
+
+Householder
+dir
+
+plugins
+dir
+
+QR
+dir
+
+Jacobi
+dir
+
+Core
+dir
+
+Geometry
+dir
+
+misc
+dir
+
+SVD
+dir
+
+Sparse
+dir
+
+StlSupport
+dir
+
+Eigen2Support
+dir
+
+Eigenvalues
+dir
+
+CMakeLists.txt
+file
+
+
+
+
+2011-12-07T11:07:55.979184Z
+2ebef3f13165f24e7bc3f09b782f73b2
+2011-10-04T14:50:37.848129Z
+23
+e0351761
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+308
+

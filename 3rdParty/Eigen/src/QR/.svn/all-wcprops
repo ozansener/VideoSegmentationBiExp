@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/QR
+END
+ColPivHouseholderQR.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/QR/ColPivHouseholderQR.h
+END
+HouseholderQR.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/QR/HouseholderQR.h
+END
+FullPivHouseholderQR.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/QR/FullPivHouseholderQR.h
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/QR/CMakeLists.txt
+END

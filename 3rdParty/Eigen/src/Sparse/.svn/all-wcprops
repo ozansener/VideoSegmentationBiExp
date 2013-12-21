@@ -1,0 +1,161 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse
+END
+CompressedStorage.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/CompressedStorage.h
+END
+AmbiVector.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/AmbiVector.h
+END
+SparseUtil.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseUtil.h
+END
+SparseCwiseBinaryOp.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseCwiseBinaryOp.h
+END
+SparseTranspose.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseTranspose.h
+END
+SparseDiagonalProduct.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseDiagonalProduct.h
+END
+SparseProduct.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseProduct.h
+END
+SparseAssign.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseAssign.h
+END
+TriangularSolver.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/TriangularSolver.h
+END
+SparseDot.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseDot.h
+END
+SparseFuzzy.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseFuzzy.h
+END
+SparseRedux.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseRedux.h
+END
+SparseCwiseUnaryOp.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseCwiseUnaryOp.h
+END
+SparseBlock.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseBlock.h
+END
+MappedSparseMatrix.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/MappedSparseMatrix.h
+END
+SparseSelfAdjointView.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseSelfAdjointView.h
+END
+SparseSparseProduct.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseSparseProduct.h
+END
+SparseMatrixBase.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseMatrixBase.h
+END
+SparseDenseProduct.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseDenseProduct.h
+END
+SparseVector.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseVector.h
+END
+SparseTriangularView.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseTriangularView.h
+END
+SparseMatrix.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseMatrix.h
+END
+CoreIterators.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/CoreIterators.h
+END
+DynamicSparseMatrix.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/DynamicSparseMatrix.h
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/CMakeLists.txt
+END
+SparseView.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/Sparse/SparseView.h
+END

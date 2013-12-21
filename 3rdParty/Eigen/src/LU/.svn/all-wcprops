@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/LU
+END
+Determinant.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/LU/Determinant.h
+END
+Inverse.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/LU/Inverse.h
+END
+PartialPivLU.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/LU/PartialPivLU.h
+END
+FullPivLU.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/LU/FullPivLU.h
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/2D3D_metu/!svn/ver/23/Scribble/Eigen/src/LU/CMakeLists.txt
+END
