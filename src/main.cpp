@@ -64,17 +64,11 @@ int main(){
     
         curFrame->getFromPrevFrame(prevFrame);
         curFrame->getPixelResidual();
-        
-//        sprintf(aName,"nexy%d.txt",i+1);
-//        curFrame->writeOutGraph(aName,false);
-        
+                
         curFrame->smoothN();
-        
- //       sprintf(aName,"nexyS%d.txt",i+1);
-//        curFrame->writeOutGraph(aName,false);
-        
-         if(i%80==79)
-       {
+                
+        if(i%80==79)
+        {
             curFrame->getPixelResidual();
             curFrame->solveGCutNoGMM(prevFrame); 
             curFrame->learnGMM2(15);
@@ -82,18 +76,16 @@ int main(){
             curFrame->solveGCut();
             curFrame->getPixelWiseResidual();
         }else{
-     //      curFrame->getPixelResidual();
+            curFrame->getPixelResidual();
             curFrame->solveGCutNoGMM(prevFrame); 
-   //         curFrame->getPixelWiseResidual();
+            curFrame->getPixelWiseResidual();
         }
-  //      sprintf(aName,"res%d.txt",i+1);
-  //      curFrame->writeOutGraph(aName,false);
-        
+        sprintf(aName,"res%d.txt",i+1);
+        curFrame->writeOutGraph(aName,false);
+        curFrame->smooth();
 
-//        curFrame->smooth();
-
-//        sprintf(aName,"resS%d.txt",i+1);
- //       curFrame->writeOutGraph(aName,false);
+        sprintf(aName,"resS%d.txt",i+1);
+        curFrame->writeOutGraph(aName,false);
 
         Frame.copyTo(canvIm);
         curFrame->getResult(canvIm);
@@ -108,22 +100,13 @@ int main(){
 
     return 0;
 
-
-
-
-
-
     Mat FrameClean;
     Mat FrameDiff;
-
-
     
     clock_t sTime1;
     clock_t sTime2;
     clock_t sTime3;
-
-    //sTime3=clock();
-
+    
     return 0;
 
 }
